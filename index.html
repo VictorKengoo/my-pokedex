@@ -70,7 +70,6 @@
     }
     .container{
       padding: 40px;
-      margin: 0 auto;
     }
     .steel {
 	    background-color: #bebcbc;
@@ -132,11 +131,15 @@
       background-color: #F5F5F5;
     }
     
-    .github-icon{
+    .github-icon, .github-button{
       border-radius: 50%;
       height: 72px;
       width: 72px;
-      display: block;
+      display: inline-block;
+    }
+
+    .header-content{
+      display: grid;
     }
 
     .about { 
@@ -166,16 +169,18 @@
 <body>
   <div class="container">    
     <h1>MY POKEDEX</h1>
-    <a href="https://github.com/VictorKengoo/my-pokedex" target="_blank" rel="noreferrer noopener">
-      <img class="github-icon" text="GitHub" src="https://www.flaticon.com/svg/static/icons/svg/25/25231.svg"/>
-    </a>
-    <button class="button-about" title="about">About</button>
-    <div class="about">
-      <h3>Por: Victor Kengoo - 082170030</h3>
-      <h3>Aplicação que consome dados de duas APIs:</h3>
-      <h3>Uma que retorna as informações dos Pokemon (PokeApi)</h3>
-      <h3>E outra para retornar a imagem em alta resolução do Pokemon (pokeres.bastionbot.org)</h3>
-      <h3>(Lista todos os 893 Pokemon, mostrando seu número na Pokedex, nome, tipos do Pokemon e sua imagem)</h3>
+    <div class="header-content">
+      <a class="github-button" href="https://github.com/VictorKengoo/my-pokedex" rel="noreferrer noopener">
+        <img class="github-icon" src="https://www.flaticon.com/svg/static/icons/svg/25/25231.svg"/>
+      </a>
+      <button class="button-about" title="about">About</button>
+      <div class="about">
+        <h3>Por: Victor Kengoo - 082170030</h3>
+        <h3>Aplicação que consome dados de duas APIs:</h3>
+        <h3>Uma que retorna as informações dos Pokemon (PokeApi)</h3>
+        <h3>E outra para retornar a imagem em alta resolução do Pokemon (pokeres.bastionbot.org)</h3>
+        <h3>(Lista todos os 893 Pokemon, mostrando seu número na Pokedex, nome, tipos do Pokemon e sua imagem)</h3>
+      </div>
     </div>      
     <ol id="pokedex"></ol>
   </div>
