@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Pokedex</title>
+
+  <style>
+    h1{
+      font-family: roboto;
+      text-align: center;
+      font-size: 54px;
+      font-style: 54px;
+    }
+    body{
+      margin: 0;
+      font-family: roboto;
+      color: #222;
+      background: #EFEFBB;
+      background: linear-gradient(to right, rgb(197, 230, 236), rgb(239, 187, 230));
+    }
+    .card{
+      list-style: none;
+      padding: 40px;
+      background-color: #f4f4f4;
+      color: #222;
+      text-align: center;
+      border-radius: 2%;
+    }
+    
+    .card:hover{
+      animation: bounce 0.5s linear;
+    }
+    @keyframes bounce{
+      20%{
+        transform: translateY(-6px);
+      }
+      40%{
+        transform: translateY(0px);
+      }
+      60%{
+        transform: translateY(-2px);
+      }
+      80%{
+        transform: translateY(0px);
+      }
+      100% {
+			  transform: translateY(0);
+	    }
+    }
+    .card-title{
+      text-transform: uppercase;
+      font-size: 32px;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
+    .card-subtitle{
+      font-weight: lighter;
+      color: #666;
+      margin-top: 5px;
+    }
+    .card-image{
+      height: 180px;
+    }
+    #pokedex{
+      padding-inline-start: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-gap: 20px;
+    }
+    .container{
+      padding: 40px;
+      margin: 0 auto;
+    }
+    .steel {
+	    background-color: #bebcbc;
+    }
+
+    .fire {
+      background-color: #f38c8c;
+    }
+
+    .grass {
+      background-color: #b0ebb4;
+    }
+
+    .electric {
+      background-color: #f0df8a;
+    }
+
+    .water, .ice {
+      background-color: #c6e7f6;
+    }
+
+    .ground {
+      background-color: #f4e7da;
+    }
+
+    .rock {
+      background-color: #ebdd8d;
+    }
+
+    .fairy {
+      background-color: #E7A1B0;
+    }
+
+    .poison {
+      background-color: #d390cd;
+    }
+
+    .bug {
+      background-color: #ecffe2;
+    }
+
+    .dragon {
+      background-color: #adbbd4;
+    }
+
+    .psychic {
+      background-color: #e9b5e6;
+    }
+
+    .flying {
+      background-color: #e3e5d1;
+    }
+
+    .fighting {
+      background-color: #e7bd93;
+    }
+
+    .normal {
+      background-color: #F5F5F5;
+    }
+    
+    .github-icon{
+      border-radius: 50%;
+      height: 72px;
+      width: 72px;
+      display: block;
+    }
+
+    .about { 
+      display:none; 
+    }
+
+    .button-about{
+      margin-top: 24px;
+      font-family: roboto;
+      font-size: 18px;
+      border:1;
+      background: linear-gradient(to right, rgb(197, 230, 236), rgb(234, 223, 236));
+      border-radius: 15%;
+      height: 48px;
+      width: 72px;
+    }
+
+    .button-about:hover + .about{
+      display:block;
+    }
+
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">    
+    <h1>MY POKEDEX</h1>
+    <a href="https://github.com/VictorKengoo" target="_blank" rel="noreferrer noopener">
+      <img class="github-icon" text="GitHub" src="https://www.flaticon.com/svg/static/icons/svg/25/25231.svg"/>
+    </a>
+    <button class="button-about" title="about">About</button>
+    <div class="about">
+      <h3>Por: Victor Kengoo - 082170030</h3>
+      <h3>Aplicação que consome dados de duas APIs:</h3>
+      <h3>Uma que retorna as informações dos Pokemon (PokeApi)</h3>
+      <h3>E outra para retornar a imagem em alta resolução do Pokemon (pokeres.bastionbot.org)</h3>
+      <h3>(Lista todos os 893 Pokemon, mostrando seu número na Pokedex, nome, tipos do Pokemon e sua imagem)</h3>
+    </div>      
+    <ol id="pokedex"></ol>
+  </div>
+
+  <script>
+    const pokedex = document.getElementById("pokedex")
+    const getUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+    const getPokemon = () => {
+      const generatePromises = () => Array(893).fill().map((_, index) => 
+        fetch(getUrl((index == 769) ? 769 : index+1)).then(res => res.json()));
+
+      const promises = generatePromises();
+      
+      Promise.all(promises).then(results => {
+        const pokemon = results.map(data => ({
+          name: data.name,
+          id: data.id,
+          type: data.types.map(type => type.type.name).join(" | ")
+        }));
+        showPokemon(pokemon);
+      });
+    }
+
+    const showPokemon = (pokemon) => {
+      const pokemonHtml = pokemon.map(uniquePokemon => `
+        <li class="card ${uniquePokemon.type.split(" | ")[0]}">
+          <img class="card-image" alt="${uniquePokemon.name}" src="https://pokeres.bastionbot.org/images/pokemon/${uniquePokemon.id}.png" />
+          <h2 class="card-title">${uniquePokemon.id}. ${uniquePokemon.name}</h2>
+          <p class="card-subtitle">Type: ${uniquePokemon.type}</p>
+        </li>
+      `).join('');
+      pokedex.innerHTML = pokemonHtml;
+    }
+
+    getPokemon();
+  </script>
+
+</body>
+</html>
