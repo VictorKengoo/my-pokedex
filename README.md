@@ -1,5 +1,5 @@
 # my-pokedex
-https://www.youtube.com/watch?v=o__uZa9DBTE&ab_channel=TikTok
+https://victorkengoo.github.io/my-pokedex/
 
 Application that shows every Pokemon in the Pokedex
 
