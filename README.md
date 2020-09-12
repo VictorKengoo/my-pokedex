@@ -1,4 +1,6 @@
 # my-pokedex
+https://www.youtube.com/watch?v=o__uZa9DBTE&ab_channel=TikTok
+
 Application that shows every Pokemon in the Pokedex
 
 - A aplicação consome dados de duas APIs (PokeApi e pokeres.bastionbot.org)
